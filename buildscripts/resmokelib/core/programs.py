@@ -8,6 +8,7 @@ import os
 import os.path
 import stat
 import sys
+from distutils.command.config import config
 
 from . import jasper_process
 from . import process
@@ -281,6 +282,9 @@ def mongo_shell_program(  # pylint: disable=too-many-branches,too-many-locals,to
             test_data[opt_name] = opt_default
 
     global_vars["TestData"] = test_data
+
+    if config.EVERGREEN_TASK_ID is not None:
+        test_data["inEvergreen"] = True
 
     # Initialize setParameters for mongod and mongos, to be passed to the shell via TestData. Since
     # they are dictionaries, they will be converted to JavaScript objects when passed to the shell
