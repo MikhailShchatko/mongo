@@ -75,7 +75,7 @@ clearRawMongoProgramOutput();
 
 TestData.inEvergreen = false;
 MongoRunner.runHangAnalyzer.enable();
-MongoRunner.runHangAnalyzer([20200125]);
+MongoRunner.runHangAnalyzer(TestData.peerPids);
 
 const lines = rawMongoProgramOutput().split('\n');
 // Nothing should be executed, so there's no output.

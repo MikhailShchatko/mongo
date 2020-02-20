@@ -8,7 +8,6 @@ import os
 import os.path
 import stat
 import sys
-from distutils.command.config import config
 
 from . import jasper_process
 from . import process
