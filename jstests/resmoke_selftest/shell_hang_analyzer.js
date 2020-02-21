@@ -73,9 +73,15 @@ assert.eq(lines, ['']);
  */
 clearRawMongoProgramOutput();
 
-TestData.inEvergreen = false;
-MongoRunner.runHangAnalyzer.enable();
-MongoRunner.runHangAnalyzer(TestData.peerPids);
+const origInEvg = TestData.inEvergreen;
+
+try {
+    TestData.inEvergreen = false;
+    MongoRunner.runHangAnalyzer.enable();
+    MongoRunner.runHangAnalyzer(TestData.peerPids);
+} finally {
+    TestData.inEvergreen = origInEvg;
+}
 
 const lines = rawMongoProgramOutput().split('\n');
 // Nothing should be executed, so there's no output.
